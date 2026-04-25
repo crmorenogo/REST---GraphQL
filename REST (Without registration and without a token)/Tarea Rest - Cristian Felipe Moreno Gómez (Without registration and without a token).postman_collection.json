@@ -1,0 +1,240 @@
+{
+  "info": {
+    "_postman_id": "9613165c-7808-46e4-ac49-fc14d98bf568",
+    "name": "Tarea Rest - Cristian Felipe Moreno Gómez (Without registration and without a token)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "52906809",
+    "_collection_link": "https://go.postman.co/collection/52906809-9613165c-7808-46e4-ac49-fc14d98bf568?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "1. GET - Get Random User",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Random user\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData).to.have.property('results');\r",
+              "    pm.expect(jsonData.results).to.be.an('array');\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://randomuser.me/api",
+          "protocol": "https",
+          "host": [
+            "randomuser",
+            "me"
+          ],
+          "path": [
+            "api"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "2. GET - Get 10 Random Users",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"10 random users\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData.results.length).to.eql(10);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://randomuser.me/api?results=10",
+          "protocol": "https",
+          "host": [
+            "randomuser",
+            "me"
+          ],
+          "path": [
+            "api"
+          ],
+          "query": [
+            {
+              "key": "results",
+              "value": "10"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "3. GET - Get Random Spanish User",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Spanish\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData.results[0].nat).to.eql(\"ES\");\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://randomuser.me/api?nat=es",
+          "protocol": "https",
+          "host": [
+            "randomuser",
+            "me"
+          ],
+          "path": [
+            "api"
+          ],
+          "query": [
+            {
+              "key": "nat",
+              "value": "es"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "4. GET - Get Filter by Gender",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Female gender\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData.results[0].gender).to.eql(\"female\");\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://randomuser.me/api?gender=female",
+          "protocol": "https",
+          "host": [
+            "randomuser",
+            "me"
+          ],
+          "path": [
+            "api"
+          ],
+          "query": [
+            {
+              "key": "gender",
+              "value": "female"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "5. GET - Get Name and email",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"Name and email\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    var user = jsonData.results[0];",
+              "    pm.expect(user).to.have.all.keys('name', 'email');",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "pm.test(\"Status code is 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Name and email\", function () {\r\n    var jsonData = pm.response.json();\r\n    var user = jsonData.results[0];\r\n    pm.expect(user).to.have.all.keys('name', 'email');\r\n});"
+        },
+        "url": {
+          "raw": "https://randomuser.me/api/?inc=name,email",
+          "protocol": "https",
+          "host": [
+            "randomuser",
+            "me"
+          ],
+          "path": [
+            "api",
+            ""
+          ],
+          "query": [
+            {
+              "key": "inc",
+              "value": "name,email"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
